@@ -282,27 +282,33 @@ def _process_local_source_module(
     Returns:
         str: Entry point.
     """
+
     try:
         # raises FileNotFoundError if not found
         abs_path_source_module = Path(source_module).resolve(strict=True)
     except FileNotFoundError:
         raise ValueError(f"Source module not found: {source_module}")
 
-    # entry_point = entry_point or abs_path_source_module.stem
-    # _validate_entry_point(abs_path_source_module, entry_point)
 
-    if entry_point == None: # if entry_point is not given, then by default it is a python module
-        entry_point = abs_path_source_module.stem
-        _validate_entry_point(abs_path_source_module, entry_point)
+    _, _, _surfix = source_module.partition(".") 
+    if surfix == "jl": # The source module is a julia script, then we simply run it.    
+        pass
     else:
-        importable, _, _surfix = entry_point.partition(".") 
-        if _surfix == "jl": 
-            # This is a julia module. No validation, as I am not sure how to do it yet...
-            pass 
-        elif _surfix == "py": # This is a python module
-            _validate_entry_point(abs_path_source_module, entry_point)
-        else:
-            raise ValueError("Can only run julia or python module now")
+        entry_point = entry_point or abs_path_source_module.stem
+        _validate_entry_point(abs_path_source_module, entry_point)
+
+    # if entry_point == None: # if entry_point is not given, then by default it is a python module
+    #     entry_point = abs_path_source_module.stem
+    #     _validate_entry_point(abs_path_source_module, entry_point)
+    # else:
+    #     importable, _, _surfix = entry_point.partition(".") 
+    #     if _surfix == "jl": 
+    #         # This is a julia module. No validation, as I am not sure how to do it yet...
+    #         pass 
+    #     elif _surfix == "py": # This is a python module
+    #         _validate_entry_point(abs_path_source_module, entry_point)
+    #     else:
+    #         raise ValueError("Can only run julia or python module now")
 
 
 

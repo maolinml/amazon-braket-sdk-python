@@ -283,6 +283,9 @@ def _process_local_source_module(
         str: Entry point.
     """
 
+    print(f"source_module={source_module}")
+    
+
     try:
         # raises FileNotFoundError if not found
         abs_path_source_module = Path(source_module).resolve(strict=True)

@@ -291,7 +291,7 @@ def _process_local_source_module(
 
 
     _, _, _surfix = source_module.partition(".") 
-    if surfix == "jl": # The source module is a julia script, then we simply run it.    
+    if _surfix == "jl": # The source module is a julia script, then we simply run it.    
         pass
     else:
         entry_point = entry_point or abs_path_source_module.stem

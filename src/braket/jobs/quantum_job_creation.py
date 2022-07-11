@@ -289,7 +289,7 @@ def _process_local_source_module(
         # raises FileNotFoundError if not found
         abs_path_source_module = Path(source_module).resolve(strict=True)
     except FileNotFoundError:
-        raise ValueError(f"wtf Source module not found: {source_module}")
+        raise ValueError(f"Source module not found: {source_module}")
 
 
     _, _, _surfix = source_module.partition(".") 

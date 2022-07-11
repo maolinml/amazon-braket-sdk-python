@@ -292,7 +292,7 @@ def _process_local_source_module(
     # _validate_entry_point(abs_path_source_module, entry_point)
 
     if entry_point == None: # if entry_point is not given, then by default it is a python module
-        entry_point = abs_path_source_module
+        entry_point = abs_path_source_module.stem
         _validate_entry_point(abs_path_source_module, entry_point)
     else:
         importable, _, _surfix = entry_point.partition(".") 

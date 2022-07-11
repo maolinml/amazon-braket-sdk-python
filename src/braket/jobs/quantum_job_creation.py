@@ -288,8 +288,24 @@ def _process_local_source_module(
     except FileNotFoundError:
         raise ValueError(f"Source module not found: {source_module}")
 
-    entry_point = entry_point or abs_path_source_module.stem
+    # entry_point = entry_point or abs_path_source_module.stem
     # _validate_entry_point(abs_path_source_module, entry_point)
+
+    if entry_point == None: # if entry_point is not given, then by default it is a python module
+        entry_point = abs_path_source_module
+        _validate_entry_point(abs_path_source_module, entry_point)
+    else:
+        importable, _, _surfix = entry_point.partition(".") 
+        if _surfix == ".jl": 
+            # This is a julia module. No validation, as I am not sure how to do it yet...
+            pass 
+        elif _surfix == ".py": # This is a python module
+            _validate_entry_point(abs_path_source_module, entry_point)
+        else:
+            raise ValueError("Can only run julia or python module now")
+
+
+
     _tar_and_upload_to_code_location(abs_path_source_module, aws_session, code_location)
     return entry_point
 

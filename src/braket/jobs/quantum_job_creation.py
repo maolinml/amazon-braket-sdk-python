@@ -289,7 +289,7 @@ def _process_local_source_module(
         raise ValueError(f"Source module not found: {source_module}")
 
     entry_point = entry_point or abs_path_source_module.stem
-    _validate_entry_point(abs_path_source_module, entry_point)
+    # _validate_entry_point(abs_path_source_module, entry_point)
     _tar_and_upload_to_code_location(abs_path_source_module, aws_session, code_location)
     return entry_point
 

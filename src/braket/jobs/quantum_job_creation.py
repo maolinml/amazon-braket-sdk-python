@@ -296,10 +296,10 @@ def _process_local_source_module(
         _validate_entry_point(abs_path_source_module, entry_point)
     else:
         importable, _, _surfix = entry_point.partition(".") 
-        if _surfix == ".jl": 
+        if _surfix == "jl": 
             # This is a julia module. No validation, as I am not sure how to do it yet...
             pass 
-        elif _surfix == ".py": # This is a python module
+        elif _surfix == "py": # This is a python module
             _validate_entry_point(abs_path_source_module, entry_point)
         else:
             raise ValueError("Can only run julia or python module now")

@@ -292,7 +292,7 @@ def _process_local_source_module(
 
     _, _, _surfix = source_module.partition(".") 
     if _surfix == "jl": # The source module is a julia script, then we simply run it.    
-        pass
+        print("A julia script accepted. No validation is done.")
     else:
         entry_point = entry_point or abs_path_source_module.stem
         _validate_entry_point(abs_path_source_module, entry_point)
